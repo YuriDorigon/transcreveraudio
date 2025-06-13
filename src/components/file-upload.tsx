@@ -4,7 +4,6 @@ import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { UploadCloud, FileAudio } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 
 interface FileUploadProps {
   onFileSelect: (file: File) => void;
@@ -36,33 +35,31 @@ export function FileUpload({ onFileSelect, onFileError, acceptedFileType = ".mp3
   });
 
   return (
-    <Card className="w-full max-w-lg shadow-md">
-      <CardContent className="p-6">
-        <div
-          {...getRootProps()}
-          className={`flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer transition-colors
-            ${isDragActive || isDragging ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/70'}`}
-        >
-          <input {...getInputProps()} aria-label="Upload de arquivo MP3" />
-          <UploadCloud className={`w-16 h-16 mb-4 ${isDragActive || isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
-          {isDragActive ? (
-            <p className="text-primary font-semibold">Solte o arquivo aqui...</p>
-          ) : (
-            <p className="text-center text-muted-foreground">
-              Arraste e solte um arquivo MP3 aqui, ou
-              <Button variant="link" className="p-0 h-auto ml-1 text-accent">clique para selecionar</Button>
-            </p>
-          )}
-        </div>
-        {fileName && (
-          <div className="mt-4 p-3 bg-secondary rounded-md flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <FileAudio className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium text-secondary-foreground">{fileName}</span>
-            </div>
-          </div>
+    <div className="w-full flex flex-col items-center gap-4">
+      <div
+        {...getRootProps()}
+        className={`w-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+          ${isDragActive || isDragging ? 'border-primary bg-primary/10' : 'border-border hover:border-primary/70'}`}
+      >
+        <input {...getInputProps()} aria-label="Upload de arquivo MP3" />
+        <UploadCloud className={`w-16 h-16 mb-4 ${isDragActive || isDragging ? 'text-primary' : 'text-muted-foreground'}`} />
+        {isDragActive ? (
+          <p className="text-primary font-semibold">Solte o arquivo aqui...</p>
+        ) : (
+          <p className="text-center text-muted-foreground">
+            Arraste e solte um arquivo MP3 aqui, ou
+            <Button variant="link" className="p-0 h-auto ml-1 text-accent">clique para selecionar</Button>
+          </p>
         )}
-      </CardContent>
-    </Card>
+      </div>
+      {fileName && (
+        <div className="w-full mt-2 p-3 bg-secondary rounded-md flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <FileAudio className="w-5 h-5 text-primary" />
+            <span className="text-sm font-medium text-secondary-foreground">{fileName}</span>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

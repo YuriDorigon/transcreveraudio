@@ -87,14 +87,6 @@ export default function HomePage() {
     };
   };
   
-  // Effect to manage body class for centering content
-  useEffect(() => {
-    document.body.classList.add('flex', 'flex-col');
-    return () => {
-      document.body.classList.remove('flex', 'flex-col');
-    };
-  }, []);
-
 
   return (
     <>
