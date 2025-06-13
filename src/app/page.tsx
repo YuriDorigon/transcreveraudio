@@ -1,6 +1,7 @@
+
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { AppHeader } from '@/components/layout/app-header';
 import { AppFooter } from '@/components/layout/app-footer';
 import { FileUpload } from '@/components/file-upload';
@@ -20,10 +21,7 @@ export default function HomePage() {
   const { toast } = useToast();
 
   const handleFileSelect = (file: File) => {
-    if (file.type !== 'audio/mpeg') {
-        handleFileError("Tipo de arquivo inválido. Por favor, envie um arquivo .mp3.");
-        return;
-    }
+    // File type validation is now primarily handled by react-dropzone in FileUpload component
     setSelectedFile(file);
     setFileName(file.name);
     setTranscription(null); // Clear previous transcription
@@ -43,7 +41,7 @@ export default function HomePage() {
     if (!selectedFile) {
       toast({
         title: 'Nenhum arquivo selecionado',
-        description: 'Por favor, selecione um arquivo MP3 para transcrever.',
+        description: 'Por favor, selecione um arquivo MP3 ou M4A para transcrever.',
         variant: 'destructive',
       });
       return;
@@ -96,7 +94,7 @@ export default function HomePage() {
           <CardHeader className="text-center p-0 mb-6">
             <CardTitle className="text-2xl font-headline text-foreground">Transforme Áudio em Texto</CardTitle>
             <CardDescription className="text-md text-muted-foreground mt-2">
-              Envie um arquivo MP3 e receba a transcrição em texto, tudo em português do Brasil.
+              Envie um arquivo MP3 ou M4A e receba a transcrição em texto, tudo em português do Brasil.
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col items-center gap-6 p-0">
