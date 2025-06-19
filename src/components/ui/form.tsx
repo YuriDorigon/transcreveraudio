@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -96,7 +97,7 @@ const FormLabel = React.forwardRef<
     <Label
       ref={ref}
       className={cn(error && "text-destructive", className)}
-      htmlFor={formItemId}
+      htmlFor={formItemId} // Ensure this is correctly linking to the input
       {...props}
     />
   )
@@ -112,7 +113,7 @@ const FormControl = React.forwardRef<
   return (
     <Slot
       ref={ref}
-      id={formItemId}
+      id={formItemId} // Ensure input gets this ID
       aria-describedby={
         !error
           ? `${formDescriptionId}`
@@ -159,6 +160,7 @@ const FormMessage = React.forwardRef<
       id={formMessageId}
       className={cn("text-sm font-medium text-destructive", className)}
       {...props}
+      role="alert" // Added for better accessibility
     >
       {body}
     </p>

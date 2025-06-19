@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -81,6 +82,7 @@ const ToastClose = React.forwardRef<
       className
     )}
     toast-close=""
+    aria-label="Fechar notificação"
     {...props}
   >
     <X className="h-4 w-4" />

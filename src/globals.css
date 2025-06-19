@@ -52,11 +52,9 @@
     --sidebar-accent-foreground: var(--accent-foreground);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
-  }
 
-  /* The .dark class is on <html>, so :root variables apply directly.
-     This block can be used for specific overrides if a light theme was also defined. */
-  .dark {
+    --font-inter: 'Inter', sans-serif;
+    --font-playfair-display: 'Playfair Display', serif;
   }
 }
  
@@ -65,11 +63,15 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground antialiased; /* Corrected from text-foreground-primary */
-    font-family: var(--font-inter), sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-inter);
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair-display), serif;
+    font-family: var(--font-playfair-display);
+  }
+  /* Improve focus visibility for all focusable elements */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }
 
@@ -98,16 +100,37 @@
 @keyframes subtle-pulse {
   0%, 100% {
     transform: scale(1);
-    /* filter: brightness(100%); */ /* Removed filter as it might not be universally desired */
   }
   50% {
     transform: scale(1.03);
-    /* filter: brightness(110%); */
   }
 }
+.motion-safe\:animate-subtle-pulse:not(.no-pulse):hover {
+  animation: subtle-pulse 1.5s infinite ease-in-out;
+}
+
 
 /* Blinking cursor animation for typing effect */
 @keyframes blink-cursor {
-  from, to { background-color: transparent; } /* Changed to background-color for a block cursor */
+  from, to { background-color: transparent; }
   50% { background-color: hsl(var(--primary)); }
+}
+
+/* React Image Crop specific styles to ensure visibility in dark mode */
+.ReactCrop__crop-selection {
+  border: 2px dashed hsl(var(--primary)); /* Use a visible color */
+}
+
+.ReactCrop__drag-handle {
+  background-color: hsl(var(--primary));
+  border: 1px solid hsl(var(--background));
+  width: 10px;
+  height: 10px;
+}
+
+.ReactCrop__rule-of-thirds-vt::before,
+.ReactCrop__rule-of-thirds-vt::after,
+.ReactCrop__rule-of-thirds-hz::before,
+.ReactCrop__rule-of-thirds-hz::after {
+  border-color: hsla(var(--primary), 0.4);
 }

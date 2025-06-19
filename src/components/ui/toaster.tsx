@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useToast } from "@/hooks/use-toast"
@@ -25,7 +26,7 @@ export function Toaster() {
               )}
             </div>
             {action}
-            <ToastClose />
+            <ToastClose /> {/* X icon is now rendered by default within ToastClose */}
           </Toast>
         )
       })}
